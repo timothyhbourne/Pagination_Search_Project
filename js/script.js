@@ -27,12 +27,10 @@ function showPage(list, page) {
                <div class="joined-details">
                   <span class="date">${data[i].registered.date}</span>
                </div>
-            </li>
-         `
+            </li>`
          studentList.insertAdjacentHTML("beforeend", studentItem);
       }
    }
-
  }
 
 /* 
@@ -61,46 +59,46 @@ function addPagination(list) {
            showPage(list, e.target.textContent)
          }
       })
-    }
+   }
 
 /*
 Add search bar
 */
-const header = document.querySelector('.header')
-const html = `<label for="search" class="student-search">
-   <input id="search" placeholder="Search by name...">
-   <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
-</label>`
-header.insertAdjacentHTML("beforeend", html)
+function searchBar(list) {
+   const header = document.querySelector('.header')
+   const html = 
+   `<label for="search" class="student-search">
+      <input id="search" placeholder="Search by name...">
+      <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+   </label>`
+   header.insertAdjacentHTML("beforeend", html)
 
-const label = document.querySelector('.student-search');
-const input = label.querySelector('#search');
+   const label = document.querySelector('.student-search');
+   const input = label.querySelector('#search');
+   const searchButton = label.querySelector('button');
 
-const searchButton = label.querySelector('button');
-
-/*function to update the page */
-function updatePage(list) {
-   if (list.length === 0) {
-      showPage(list, 1);
-      addPagination(list);
-      studentList.innerHTML = `<p>No results. Please try a different name.</p>`;
-   } else {
-      studentList.innerHTML = ``;
-      showPage(list, 1);
-      addPagination(list);
+   /*function to update the page */
+   function updatePage(list) {
+      if (list.length === 0) {
+         showPage(list, 1);
+         addPagination(list);
+         studentList.innerHTML = `<p>No results. Please try a different name.</p>`;
+      } else {
+         studentList.innerHTML = ``;
+         showPage(list, 1);
+         addPagination(list);
+      }
    }
+
+   searchButton.addEventListener( 'click', () => {
+      
+   });
 }
-
-/* 
-when 
-*/
-searchButton.addEventListener('click', () => {
-   const inputValue = input.value.toLowerCase();
-   if (inputValue === 'ethel') {
-      alert('hi')
-   } 
-})
-
 
 showPage(data, 1)
 addPagination(data);
+searchBar(data);
+
+/* 
+- 
+*/
