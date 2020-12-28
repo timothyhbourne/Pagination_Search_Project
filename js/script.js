@@ -91,9 +91,20 @@ function searchBar(list) {
    }
 
    searchButton.addEventListener( 'click', () => {
-      
+      let matches = [];
+      let inputValue = input.value;
+
+      for (let i = 0; i < data.length; i++) {
+         let studentName = Object.values(data[i].name).join(' ')
+         matches.push(studentName)
+      }
+      if (matches.includes(inputValue)) {
+         alert(`yes ${input.value} is a student`)         
+      }
    });
 }
+const arr = ['my name is', 'Timothy']
+console.log(arr.join(' '))
 
 showPage(data, 1)
 addPagination(data);
