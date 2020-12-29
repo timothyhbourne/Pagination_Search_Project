@@ -1,13 +1,3 @@
-/*
-Treehouse Techdegree:
-FSJS Project 2 - Data Pagination and Filtering
-*/
-
-
-/*
-`showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
-*/
 
 const studentList = document.querySelector('ul.student-list')
 
@@ -90,26 +80,24 @@ function searchBar(list) {
       }
    }
 
-   searchButton.addEventListener( 'click', () => {
-      let matches = [];
-      let inputValue = input.value;
-
-      for (let i = 0; i < data.length; i++) {
-         let studentName = Object.values(data[i].name).join(' ')
-         matches.push(studentName)
+   searchButton.addEventListener('click', () => {
+      function filteredStudents(x) {
+         let matches = [];
+         for (let i = 0; i < data.length; i++) {
+            let studentName = Object.values(data[i].name).join(' ')
+            matches.push(studentName)
+         }
+         if(data.includes(input.value.toLowerCase())) {
+            return true;
+         } else {
+            return false;
+         }
+         
       }
-      if (matches.includes(inputValue)) {
-         alert(`yes ${input.value} is a student`)         
-      }
-   });
+      updatePage(filteredStudents)
+   })
 }
-const arr = ['my name is', 'Timothy']
-console.log(arr.join(' '))
 
-showPage(data, 1)
+showPage(data, 1);
 addPagination(data);
 searchBar(data);
-
-/* 
-- 
-*/
