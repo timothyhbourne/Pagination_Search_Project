@@ -10,12 +10,12 @@ function showPage(list, page) {
          let studentItem = `
             <li class="student-item cf">
                <div class="student-details">
-                  <img class="avatar" src="${data[i].picture.large}" alt="Profile Picture">
-                  <h3>${data[i].name.first} ${data[i].name.last}</h3>
-                  <span class="email">${data[i].email}</span>
+                  <img class="avatar" src="${list[i].picture.large}" alt="Profile Picture">
+                  <h3>${list[i].name.first} ${list[i].name.last}</h3>
+                  <span class="email">${list[i].email}</span>
                </div>
                <div class="joined-details">
-                  <span class="date">${data[i].registered.date}</span>
+                  <span class="date">${list[i].registered.date}</span>
                </div>
             </li>`
          studentList.insertAdjacentHTML("beforeend", studentItem);
@@ -66,19 +66,33 @@ Add search bar
    const input = label.querySelector('#search');
    const searchButton = label.querySelector('button');
 
-   searchButton.addEventListener('click', () => {
-         let matches = [];
-         
+   function searchedStudent() {
+      let searched = [];
          for (let i = 0; i < data.length; i++) {
-            if (data[i].name.first == input.value || data[i].name.last == input.value) {
-               matches.push(data[i])
+           let firstName = data[i].name.first.toLowerCase();
+           let lastName = data[i].name.last.toLowerCase();
+           let fullName = data[i].name.first.toLowerCase() + " " + data[i].name.last.toLowerCase()
+            if (input.value == firstName || input.value == lastName || input.value == fullName) {
+               searched.push(data[i]);
             }
          }
-         console.log(matches);
+      return searched;
+   }
 
-         showPage(matches, 1);
-      addPagination(matches);
-   })
+   label.addEventListener('keyup', (e) => {
+         if (searchedStudent()) {
+            showPage(searchedStudent(), 1);
+            addPagination(searchedStudent());
+         } else {
+            alert('NOT')
+         }
+            
+   });
 
-showPage(data, 1)
+   searchButton.addEventListener('click', () => { 
+         showPage(searchedStudent(), 1);
+         addPagination(searchedStudent())
+   });
+
+   showPage(data, 1);
 addPagination(data);
