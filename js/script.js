@@ -54,7 +54,6 @@ function addPagination(list) {
 /*
 Add search bar
 */
-function searchBar(list) {
    const header = document.querySelector('.header')
    const html = 
    `<label for="search" class="student-search">
@@ -67,37 +66,19 @@ function searchBar(list) {
    const input = label.querySelector('#search');
    const searchButton = label.querySelector('button');
 
-   /*function to update the page */
-   function updatePage(list) {
-      if (list.length === 0) {
-         showPage(list, 1);
-         addPagination(list);
-         studentList.innerHTML = `<p>No results. Please try a different name.</p>`;
-      } else {
-         studentList.innerHTML = ``;
-         showPage(list, 1);
-         addPagination(list);
-      }
-   }
-
    searchButton.addEventListener('click', () => {
-      function filteredStudents(x) {
          let matches = [];
-         for (let i = 0; i < data.length; i++) {
-            let studentName = Object.values(data[i].name).join(' ')
-            matches.push(studentName)
-         }
-         if(data.includes(input.value.toLowerCase())) {
-            return true;
-         } else {
-            return false;
-         }
          
-      }
-      updatePage(filteredStudents)
-   })
-}
+         for (let i = 0; i < data.length; i++) {
+            if (data[i].name.first == input.value || data[i].name.last == input.value) {
+               matches.push(data[i])
+            }
+         }
+         console.log(matches);
 
-showPage(data, 1);
+         showPage(matches, 1);
+      addPagination(matches);
+   })
+
+showPage(data, 1)
 addPagination(data);
-searchBar(data);
