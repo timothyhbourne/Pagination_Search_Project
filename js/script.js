@@ -80,12 +80,12 @@ Add search bar
    }
 
    label.addEventListener('keyup', (e) => {
-         if (searchedStudent()) {
-            showPage(searchedStudent(), 1);
-            addPagination(searchedStudent());
-         } else {
-            alert('NOT')
-         }
+      if (studentList.innerHTML == `<ul class="student-list"></ul>`) {
+         alert('no student');
+      } else {
+      showPage(searchedStudent(), 1);
+      addPagination(searchedStudent())
+      }
             
    });
 
